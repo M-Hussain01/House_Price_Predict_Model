@@ -8,14 +8,12 @@ from src.transformation import transform_data
 from src.model import train_model
 from sklearn.metrics import r2_score
 
-# ---------------- Page Config ----------------
 st.set_page_config(
     page_title="🏠 California House Predictor",
     layout="wide",
     page_icon="🏡"
 )
 
-# ---------------- Header ----------------
 st.markdown("""
 <div style='background: linear-gradient(90deg, #4CAF50, #81C784); padding: 20px; border-radius: 15px;'>
     <h1 style='color:white; text-align:center;'>🏠 California Housing Price Predictor</h1>
@@ -24,7 +22,6 @@ st.markdown("""
 
 st.markdown("")
 
-# ---------------- Load Dataset & Train Model Once ----------------
 @st.cache_data(show_spinner=True)
 def prepare_model():
     df = load_data()
@@ -36,7 +33,6 @@ def prepare_model():
 
 df, scaler, model, r2 = prepare_model()
 
-# ---------------- User Input ----------------
 st.subheader("🛠️ Enter Features for Prediction")
 
 def user_input_features():
@@ -79,7 +75,6 @@ input_df = user_input_features()
 
 st.markdown("---")
 
-# ---------------- Prediction Button ----------------
 if st.button("💡 Predict House Value"):
     input_scaled = scaler.transform(input_df)
     prediction = model.predict(input_scaled)
@@ -94,3 +89,4 @@ if st.button("💡 Predict House Value"):
     
     with st.expander("🔍 Show Entered Features"):
         st.dataframe(input_df)
+
